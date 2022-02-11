@@ -1,0 +1,36 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "14 HÁBITOS DE DESENVOLVEDORES ALTAMENTE PRODUTIVOS",
+      "image": "https://m.media-amazon.com/images/I/41Xkqy2rMDL.jpg",
+      "price": 76.33
+    },
+    {
+      "id": 2,
+      "title": "O PODER DO HÁBITO",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/81XTXQEVPlL.jpg",
+      "price": 28.00
+    },
+    {
+      "id": 3,
+      "title": "QUEM MEXEU NO MEU QUEIJO",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/71GbwXz6M4L.jpg",
+      "price": 18.00
+    }
+  ],
+  "stock": [
+    {
+      "id": 1,
+      "quantity": 3
+    },
+    {
+      "id": 2,
+      "quantity": 1
+    },
+    {
+      "id": 3,
+      "quantity": 2
+    }
+  ]
+}

@@ -1,7 +1,13 @@
-import { FaShoppingCart } from "react-icons/fa";
+import { useCallback } from "react";
+import { MdAddCircle, MdRemoveCircle, MdDelete } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { IState } from "../../store";
+import { addProductToCartRequest, removeProductFromCart, subtractProductFromCart } from "../../store/modules/cart/actions";
+import { ICartItem } from "../../store/modules/cart/types";
 import theme from "../../styles/theme";
 
 import {
+  WrapperContainer,
   Container,
   ContentLeft,
   Image,
@@ -15,42 +21,88 @@ import {
   WrapperItemRight,
   TitlePrice,
   Price,
+  Hr,
 } from './styles';
 
-export function ItemList() {
+interface ItemListProps {
+  itens: ICartItem;
+}
+
+export function ItemList({ itens }: ItemListProps) {
+  const dispatch = useDispatch();
+
+  const hasFailedStockCheck = useSelector<IState, boolean>(state => {
+    return state.cart.failedStockCheck.includes(itens.product.id);
+  });
+
+  const handleAddProductToCart = useCallback(() => {
+    dispatch(addProductToCartRequest(itens.product))
+  }, [dispatch]);
+
+  const handleSubtractProductFromCart = useCallback(() => {
+    dispatch(subtractProductFromCart(itens.product))
+  }, [dispatch]);
+
+  const handleRemoveProductFromCart = useCallback(() => {
+    dispatch(removeProductFromCart(itens.product))
+  }, [dispatch]);
+
   return (
-    <Container>
-      <ContentLeft>
-        <Image src="https://i.ibb.co/MZB2PtD/tifa.jpg" />
-        <TitleItem>Tifa FFVII</TitleItem>
-      </ContentLeft>
+    <WrapperContainer>
+      <Container>
+        <ContentLeft>
+          <Image src={itens.product.image} />
+          <TitleItem>{itens.product.title}</TitleItem>
+        </ContentLeft>
 
-      <ContentRight>
-        <WrapperItemRightQuantity>
-          <TitlePrice>Quantidade</TitlePrice>
-          <WrapperQuantity>
-            <FaShoppingCart
-              style={{ color: theme.COLORS.PRIMARY_COLOR }}
-            />
-            <TitleQuantity>1</TitleQuantity>
-            <FaShoppingCart
-              style={{ color: theme.COLORS.PRIMARY_COLOR }}
-            />
-          </WrapperQuantity>
+        <ContentRight>
+          <WrapperItemRightQuantity>
+            <TitlePrice>Quantidade</TitlePrice>
+            <WrapperQuantity>
+              {itens.quantity > 1
+                ?
+                <MdRemoveCircle
+                  onClick={handleSubtractProductFromCart}
+                  style={{ color: theme.COLORS.PRIMARY_COLOR, cursor: 'pointer' }}
+                />
+                :
+                <MdRemoveCircle
+                  style={{ color: theme.COLORS.TEXT }}
+                />
+              }
+              <TitleQuantity>{itens.quantity}</TitleQuantity>
+              {hasFailedStockCheck
+                ?
+                <MdAddCircle
+                  title="No momento não existe mais desse item no estoque."
+                  style={{ color: theme.COLORS.TEXT }}
+                />
+                :
+                <MdAddCircle
+                  onClick={handleAddProductToCart}
+                  style={{ color: theme.COLORS.PRIMARY_COLOR, cursor: 'pointer' }}
+                />
+              }
+            </WrapperQuantity>
 
-          <WrapperRemove>
-            <FaShoppingCart
-              style={{ color: 'red' }}
-            />
-            <TitleRemove>Remover</TitleRemove>
-          </WrapperRemove>
-        </WrapperItemRightQuantity>
+            <WrapperRemove
+              onClick={handleRemoveProductFromCart}
+              style={{ color: theme.COLORS.WARNING, cursor: 'pointer' }}
+            >
+              <MdDelete />
+              <TitleRemove>Remover</TitleRemove>
+            </WrapperRemove>
+          </WrapperItemRightQuantity>
 
-        <WrapperItemRight>
-          <TitlePrice>SubTotal:</TitlePrice>
-          <Price>R$ 154,90</Price>
-        </WrapperItemRight>
-      </ContentRight>
-    </Container>
+          <WrapperItemRight>
+            <TitlePrice>SubTotal:</TitlePrice>
+            <Price>R$ {(itens.product.price * itens.quantity).toFixed(2)}</Price>
+          </WrapperItemRight>
+        </ContentRight>
+      </Container>
+
+      <Hr />
+
+    </WrapperContainer>
   );
 }

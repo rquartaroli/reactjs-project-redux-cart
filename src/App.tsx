@@ -1,15 +1,21 @@
+import { Provider } from 'react-redux';
 import { ThemeProvider } from "styled-components";
-import Routes from "./routes";
+
 import { GlobalStyle } from "./styles/global";
 import theme from "./styles/theme";
+
+import Routes from "./routes";
+import store from './store';
 
 function App() {
 
   return (
-    <ThemeProvider theme={theme}>
-      <Routes />
-      <GlobalStyle />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Routes />
+        <GlobalStyle />
+      </ThemeProvider>
+    </Provider>
   )
 }
 

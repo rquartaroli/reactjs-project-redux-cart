@@ -9,5 +9,4 @@ export const Content = styled.div`
   flex-wrap: wrap;
   width: 80%;
   margin: 1rem auto 0;
-  border: 2px solid pink;
 `;

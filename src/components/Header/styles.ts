@@ -7,8 +7,10 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
-  background-color: ${({ theme }) => theme.COLORS.PRIMARY_COLOR};
-  /* opacity: 0.8; */
+  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_DARK};
+  border-bottom: solid;
+  border-bottom-color: ${({ theme }) => theme.COLORS.PRIMARY_COLOR};
+  border-bottom-width: 1px;
 `;
 
 export const WrapperContent = styled.div`
@@ -16,31 +18,56 @@ export const WrapperContent = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  /* border: 1px solid pink; */
+
+  @media(max-width: 480px) {
+    width: 100%;
+  }
 `;
 
 export const Content = styled.div`
-  /* border: 1px solid green; */
+`;
+
+export const TitleLogo = styled.h1`
+  @media(max-width: 480px) {
+    font-size: 1.5rem;
+  }
+
+  :hover {
+    opacity: 0.8;
+  }
 `;
 
 export const Nav = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid blue; */
 `
 
 export const Ul = styled.ul`
   display: flex;
   flex-direction: row;
   list-style-type: none;
+
+  svg {
+    :hover {
+      opacity: 0.8;
+    }
+  }
 `;
 
-export const Li = styled.li`
-  margin-right: 1rem;
-  font-size: 1.2rem;
+export const WrapperQuantityItensCart = styled.div`
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  margin-top: -8px;
+  margin-left: 20px;
+  background-color: ${({ theme }) => theme.COLORS.PRIMARY_COLOR};
+  border-radius: 9px;
+`;
 
-  :last-child {
-    margin: 0;
-  }
+export const QuantityItensCart = styled.strong`
+  font-size: 0.7rem;
 `;

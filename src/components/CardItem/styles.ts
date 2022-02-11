@@ -14,7 +14,7 @@ export const Image = styled.img`
 `;
 
 export const Box = styled.div`
-  background-color: #010409;
+  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_DARK};
   padding-Bottom: 0.8rem;
 `;
 

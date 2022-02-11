@@ -24,6 +24,11 @@ function* checkProductStock({ payload }: CheckProductStockRequest) {
 
   if (availableStockResponse.data.quantity > currentQuantity) {
     yield put(addProductToCartSuccess(product));
+
+    if(availableStockResponse.data.quantity == (currentQuantity + 1 )) {
+      yield put(addProductToCartFailure(product.id));
+    }
+    
   } else {
     yield put(addProductToCartFailure(product.id));
   }

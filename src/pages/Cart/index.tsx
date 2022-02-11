@@ -45,14 +45,26 @@ export function Cart() {
 
             <WrapperSpaceBetween>
               <TitleQuantityItens>{quantityOrder} produtos</TitleQuantityItens>
-              <TitleSumPrice>R$ {totalOrder}</TitleSumPrice>
+              <TitleSumPrice>
+                {new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                  }).format(totalOrder)
+                }
+              </TitleSumPrice>
             </WrapperSpaceBetween>
 
             <Hr />
 
             <WrapperSpaceBetween>
               <TitleTotal>Total</TitleTotal>
-              <TitleResultTotal>R$ {totalOrder}</TitleResultTotal>
+              <TitleResultTotal>
+                {new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                  }).format(totalOrder)
+                }
+              </TitleResultTotal>
             </WrapperSpaceBetween>
 
           </ContainerTotalItens>

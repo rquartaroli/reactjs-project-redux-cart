@@ -96,7 +96,13 @@ export function ItemList({ itens }: ItemListProps) {
 
           <WrapperItemRight>
             <TitlePrice>SubTotal:</TitlePrice>
-            <Price>R$ {(itens.product.price * itens.quantity).toFixed(2)}</Price>
+            <Price>
+              {new Intl.NumberFormat('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL'
+                }).format((itens.product.price * itens.quantity))
+              } 
+            </Price>
           </WrapperItemRight>
         </ContentRight>
       </Container>

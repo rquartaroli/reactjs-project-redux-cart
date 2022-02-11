@@ -28,6 +28,7 @@ export function CardItem({ product }: CardItemProps) {
 
   const handleAddProductToCart = useCallback(() => {
     dispatch(addProductToCartRequest(product));
+    alert('Item adicionado ao carrinho');
   }, [dispatch]);
 
   return (
@@ -42,7 +43,13 @@ export function CardItem({ product }: CardItemProps) {
             <TitleItem>{product.title}</TitleItem>
           }
 
-          <TitlePrice>R$ {product.price}</TitlePrice>
+          <TitlePrice>
+            {new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+              }).format(product.price)
+            }
+          </TitlePrice>
         </WrapperTitles>
       </Box>
 
